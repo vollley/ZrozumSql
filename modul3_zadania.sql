@@ -1,3 +1,4 @@
+
 CREATE SCHEMA training;
 
 ALTER SCHEMA training RENAME TO training_zs;
@@ -24,3 +25,9 @@ CREATE TABLE sales (
 	added_by
 	CHECK sales_over_1k sales_amount_typ (sales_amount>1000)
 );
+
+ALTER TABLE products ADD CONSTRAINT sales FOREIGN KEY(id)
+REFERENCES sales (id)
+ON DELETE CASCADE;
+
+DROP SCHEMA training_zs CASCADE;
