@@ -88,7 +88,15 @@ TRUNCATE TABLE dml_excercises.sales RESTART IDENTITY;
 --Utwórz kopiê zapasow¹ tabeli do pliku. Nastêpnie usuñ tabelê ze schematu dml_exercises i
 --odtwórz j¹ z kopii zapasowej.
 
-COPY dml_excercises.sales FROM 'C:\Projects\PostgreSQL_dump\M5_L16_dml_excercises_COPY.copy';
+pg_dump --host localhost ^
+		--port 5432 ^
+		--username postgres ^
+		--format plain ^
+		--clean ^
+		--file "C:\Projects\PostgreSQL_dump\M5_L16_dml_excercises_COPY.copy" ^
+		postgres
+		
+COPY dml_excercises.sales TO 'C:\Projects\PostgreSQL_dump\M5_L16_dml_excercises_COPY.copy';
 
 COPY dml_excercises.sales FROM 'C:\Projects\PostgreSQL_dump\M5_L16_dml_excercises_COPY.copy';
 
