@@ -39,13 +39,13 @@ INSERT INTO dml_excercises.sales (sal_description, sal_date, sal_value, sal_qty,
  		floor(random() * 10)::int
  	FROM generate_series(1, 10000) s(i);
 
---1. Wyœwietl unikatowe daty stworzenia produktów (wed³ug atrybutu manufactured_date)
+--1. WyÅ›wietl unikatowe daty stworzenia produktÃ³w (wedÅ‚ug atrybutu manufactured_date)
 SELECT DISTINCT products.manufactured_date 
 FROM dml_excercises.products;
 
---2. Jak sprawdzisz czy 10 wstawionych produktów to 10 unikatowych kodów produktów?
+--2. Jak sprawdzisz czy 10 wstawionych produktÃ³w to 10 unikatowych kodÃ³w produktÃ³w?
 
---nie mam pomys³u, jak zrobic to jedn¹ komend¹
+--nie mam pomysÅ‚u, jak zrobic to jednÄ… komendÄ…
 
 SELECT products.product_code
 FROM dml_excercises.products;
@@ -53,25 +53,25 @@ FROM dml_excercises.products;
 SELECT product_code 
 FROM dml_excercises.products;
 
---3. Korzystaj¹c ze sk³adni IN wyœwietl produkty od kodach PRD1 i PRD9
+--3. KorzystajÄ…c ze skÅ‚adni IN wyÅ›wietl produkty od kodach PRD1 i PRD9
 SELECT products.product_name, products.product_code 
 FROM dml_excercises.products 
 WHERE product_code IN ('PRD1', 'PRD9');
 
 
---4. Wyœwietl wszystkie atrybuty z danych sprzeda¿owych, takie ¿e data sprzeda¿y jest w
---zakresie od 1 sierpnia 2020 do 31 sierpnia 2020 (w³¹cznie). Dane wynikowe maj¹ byæ
---posortowane wed³ug wartoœci sprzeda¿y malej¹co i daty sprzeda¿y rosn¹co.
---Nie by³o danych za sierpieñ, zmieni³am to na wrzesieñ. 
+--4. WyÅ›wietl wszystkie atrybuty z danych sprzedaÅ¼owych, takie Å¼e data sprzedaÅ¼y jest w
+--zakresie od 1 sierpnia 2020 do 31 sierpnia 2020 (wÅ‚Ä…cznie). Dane wynikowe majÄ… byÄ‡
+--posortowane wedÅ‚ug wartoÅ›ci sprzedaÅ¼y malejÄ…co i daty sprzedaÅ¼y rosnÄ…co.
+--Nie byÅ‚o danych za sierpieÅ„, zmieniÅ‚am to na wrzesieÅ„. 
 SELECT * 
 FROM dml_excercises.sales
 WHERE sales.sal_date > '2020/09/01' AND sales.sal_date <= '2020/09/30'
 ORDER BY sales.sal_date ASC, sales.sal_qty DESC; 
 
 
---5. Korzystaj¹c ze sk³adni NOT EXISTS wyœwietl te produkty z tabeli PRODUCTS, które nie
---bior¹ udzia³u w transakcjach sprzeda¿owych (tabela SALES). ID z tabeli Products i
---SAL_PRODUCT_ID to klucz ³¹czenia.
+--5. KorzystajÄ…c ze skÅ‚adni NOT EXISTS wyÅ›wietl te produkty z tabeli PRODUCTS, ktÃ³re nie
+--biorÄ… udziaÅ‚u w transakcjach sprzedaÅ¼owych (tabela SALES). ID z tabeli Products i
+--SAL_PRODUCT_ID to klucz Å‚Ä…czenia.
 
 SELECT p.* 
 FROM dml_excercises.products p
@@ -79,9 +79,9 @@ WHERE NOT EXISTS (SELECT 1
 						FROM dml_excercises.sales s
 						WHERE s.sal_product_id = p.id) ;
 
---6. Korzystaj¹c ze sk³adni ANY i operatora = wyœwietl te produkty, których wystêpuj¹ w
---transakcjach sprzeda¿owych (wed³ug klucza Products ID, Sales SAL_PRODUCT_ID)
---takich, ¿e wartoœæ sprzeda¿y w transakcji jest wiêksza od 100
+--6. KorzystajÄ…c ze skÅ‚adni ANY i operatora = wyÅ›wietl te produkty, ktÃ³rych wystÄ™pujÄ… w
+--transakcjach sprzedaÅ¼owych (wedÅ‚ug klucza Products ID, Sales SAL_PRODUCT_ID)
+--takich, Å¼e wartoÅ›Ä‡ sprzedaÅ¼y w transakcji jest wiÄ™ksza od 100
 
 SELECT *
 FROM dml_excercises.products 
@@ -91,7 +91,7 @@ WHERE COALESCE (product_code,'')
 				WHERE products.id = sales.sal_product_id
 				AND sal_value>100);
 			
---czy mo¿e powinnien byæ SELECT DISTINTC (tak jak poni¿ej)?			
+--czy moÅ¼e powinnien byÄ‡ SELECT DISTINTC (tak jak poniÅ¼ej)?			
 SELECT *
 FROM dml_excercises.products 
 WHERE COALESCE (product_code,'')
@@ -100,9 +100,9 @@ WHERE COALESCE (product_code,'')
 				WHERE products.id = sales.sal_product_id
 				AND sal_value>100);	
 			
---7. Stwórz now¹ tabelê PRODUCTS_OLD_WAREHOUSE o takich samych kolumnach jak
---istniej¹ca tabela produktów (tabela PRODUCTS). Wstaw do nowej tabeli kilka wierszy -
---dowolnych wed³ug Twojego uznania.
+--7. StwÃ³rz nowÄ… tabelÄ™ PRODUCTS_OLD_WAREHOUSE o takich samych kolumnach jak
+--istniejÄ…ca tabela produktÃ³w (tabela PRODUCTS). Wstaw do nowej tabeli kilka wierszy -
+--dowolnych wedÅ‚ug Twojego uznania.
 
 CREATE TABLE dml_excercises.products_old_warehouse (
 	id SERIAL,
@@ -127,13 +127,13 @@ manufactured_date)
 
  SELECT * 
  FROM dml_excercises.products;
---8. Na podstawie tabeli z zadania 7, korzystaj¹c z operacji UNION oraz UNION ALL po³¹cz
---tabelê PRODUCTS_OLD_WAREHOUSE z 5 dowolnym produktami z tabeli
---PRODUCTS, w wyniku wyœwietl jedynie nazwê produktu (kolumna PRODUCT_NAME)
+--8. Na podstawie tabeli z zadania 7, korzystajÄ…c z operacji UNION oraz UNION ALL poÅ‚Ä…cz
+--tabelÄ™ PRODUCTS_OLD_WAREHOUSE z 5 dowolnym produktami z tabeli
+--PRODUCTS, w wyniku wyÅ›wietl jedynie nazwÄ™ produktu (kolumna PRODUCT_NAME)
 --i kod produktu (kolumna PRODUCT_CODE). Czy w przypadku wykorzystania UNION
---jakieœ wierszy zosta³y pominiête?
+--jakieÅ› wierszy zostaÅ‚y pominiÄ™te?
 
--- tu nie do koñca rozumiem, czy limit 5 powinniœmy daæ, ¿eby po³¹czyæ 5 dowolnych produktów. Czy mo¿e chodzi³o o coœ innego?
+-- tu nie do koÅ„ca rozumiem, czy limit 5 powinniÅ›my daÄ‡, Å¼eby poÅ‚Ä…czyÄ‡ 5 dowolnych produktÃ³w. Czy moÅ¼e chodziÅ‚o o coÅ› innego?
 SELECT product_name, product_code 
 FROM dml_excercises.products_old_warehouse 
 UNION ALL 
@@ -148,8 +148,8 @@ SELECT product_name, product_code
 FROM dml_excercises.products
 LIMIT 5;
 
---9. Na podstawie tabeli z zadania 7, korzystaj¹c z operacji EXCEPT znajdŸ ró¿nicê zbiorów
---pomiêdzy tabel¹ PRODUCTS_OLD_WAREHOUSE a PRODUCTS, w wyniku wyœwietl
+--9. Na podstawie tabeli z zadania 7, korzystajÄ…c z operacji EXCEPT znajdÅº rÃ³Å¼nicÄ™ zbiorÃ³w
+--pomiÄ™dzy tabelÄ… PRODUCTS_OLD_WAREHOUSE a PRODUCTS, w wyniku wyÅ›wietl
 --jedynie kod produktu (kolumna PRODUCT_CODE).
 
 SELECT product_code
@@ -158,23 +158,24 @@ EXCEPT ALL
 SELECT product_code 
 FROM dml_excercises.products_old_warehouse;
 
---10. Wyœwietl 10 rekordów z tabeli sprzeda¿owej sales. Dane powinny byæ posortowane
---wed³ug wartoœci sprzeda¿y (kolumn SAL_VALUE) malej¹co.
+--10. WyÅ›wietl 10 rekordÃ³w z tabeli sprzedaÅ¼owej sales. Dane powinny byÄ‡ posortowane
+--wedÅ‚ug wartoÅ›ci sprzedaÅ¼y (kolumn SAL_VALUE) malejÄ…co.
 
 SELECT *
 FROM dml_excercises.sales s2 
 ORDER BY s2.sal_qty DESC
 LIMIT 10; 
 
---11. Korzystaj¹c z funkcji SUBSTRING na atrybucie SAL_DESCRIPTION, wyœwietl 3 dowolne
---wiersze z tabeli sprzeda¿owej w taki sposób, aby w kolumnie wynikowej dla
---SUBSTRING z SAL_DESCRIPTION wyœwietlonych zosta³o tylko 3 pierwsze znaki.
+--11. KorzystajÄ…c z funkcji SUBSTRING na atrybucie SAL_DESCRIPTION, wyÅ›wietl 3 dowolne
+--wiersze z tabeli sprzedaÅ¼owej w taki sposÃ³b, aby w kolumnie wynikowej dla
+--SUBSTRING z SAL_DESCRIPTION wyÅ›wietlonych zostaÅ‚o tylko 3 pierwsze znaki.
 
 SELECT substring(sal_description,1, 3)  AS znaki_sal_description
-FROM dml_excercises.sales;
+FROM dml_excercises.sales
+LIMIT 3;
 
---12. Korzystaj¹c ze sk³adni LIKE znajdŸ wszystkie dane sprzeda¿owe, których opis sprzeda¿y
---(SAL_DESCRIPTION) zaczyna siê od c4c.
+--12. KorzystajÄ…c ze skÅ‚adni LIKE znajdÅº wszystkie dane sprzedaÅ¼owe, ktÃ³rych opis sprzedaÅ¼y
+--(SAL_DESCRIPTION) zaczyna siÄ™ od c4c.
 
 SELECT *
 FROM dml_excercises.sales 
